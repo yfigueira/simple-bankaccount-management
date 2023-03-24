@@ -4,14 +4,17 @@ import org.example.transaction.Money;
 import org.example.transaction.Transaction;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 public class BankAccount {
 
     private final String customerName;
+
     private final String customerId;
+
     private Money balance;
-    private final Collection<Transaction> transactions;
+
+    private final List<Transaction> transactions;
 
     public BankAccount(String customerName, String customerId) {
         this.customerName = customerName;
@@ -28,11 +31,18 @@ public class BankAccount {
         return this.customerId;
     }
 
-    public Collection<Transaction> getTransactions() {
+    public List<Transaction> getTransactions() {
         return this.transactions;
     }
 
     public Money getBalance() {
         return this.balance;
+    }
+
+    public void deposit(Money amount) {
+        Transaction deposit = Transaction.deposit(balance, amount);
+        balance = deposit.getResult();
+        deposit.setDate();
+        transactions.add(deposit);
     }
 }

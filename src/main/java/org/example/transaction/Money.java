@@ -9,7 +9,7 @@ public class Money {
     private final BigDecimal amount;
     private final String currency;
 
-    Money(BigDecimal amount) {
+    public Money(BigDecimal amount) {
         this.amount = amount.setScale(2, RoundingMode.HALF_EVEN);
         this.currency = "USD";
     }
@@ -18,7 +18,7 @@ public class Money {
         return this.amount;
     }
 
-    Money plus(Money augend) {
+    public Money plus(Money augend) {
         return new Money(this.amount.add(augend.amount));
     }
 
