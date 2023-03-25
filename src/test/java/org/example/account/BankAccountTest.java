@@ -77,7 +77,7 @@ public class BankAccountTest {
     }
 
     @Test
-    void deposit_ShouldBeSavedInTransactionHistory() {
+    void transaction_ShouldBeSavedInTransactionHistory() {
         // given field account and:
         Money amount = new Money(new BigDecimal("100.00"));
         // when
@@ -121,15 +121,5 @@ public class BankAccountTest {
         account.withdraw(oneHundred);
         // then
         assertThat(account.getBalance(), is(equalTo(initialBalance)));
-    }
-
-    @Test
-    void withdrawal_ShouldBeSavedInTransactionsHistory() {
-        // given field account and:
-        Money amount = new Money(new BigDecimal("100.00"));
-        // when
-        account.withdraw(amount);
-        // then
-        assertThat(account.getTransactionHistory(), is(not(emptyCollectionOf(Transaction.class))));
     }
 }

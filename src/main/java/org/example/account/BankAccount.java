@@ -44,15 +44,17 @@ public class BankAccount {
 
     public void deposit(Money amount) {
         Transaction deposit = Transaction.deposit(balance, amount);
-        deposit.run();
-        balance = deposit.getResult();
-        transactionHistory.save(deposit);
+        run(deposit);
     }
 
     public void withdraw(Money amount) {
         Transaction withdrawal = Transaction.withdrawal(balance, amount);
-        withdrawal.run();
-        balance = withdrawal.getResult();
-        transactionHistory.save(withdrawal);
+        run(withdrawal);
+    }
+
+    private void run(Transaction transaction) {
+        transaction.run();
+        balance = transaction.getResult();
+        transactionHistory.save(transaction);
     }
 }
