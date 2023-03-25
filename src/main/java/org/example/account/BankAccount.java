@@ -1,7 +1,9 @@
 package org.example.account;
 
+import org.example.transaction.InMemoryTransactionHistory;
 import org.example.transaction.Money;
 import org.example.transaction.Transaction;
+import org.example.transaction.TransactionHistory;
 
 import java.util.List;
 

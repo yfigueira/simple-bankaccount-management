@@ -1,6 +1,4 @@
-package org.example.account;
-
-import org.example.transaction.Transaction;
+package org.example.transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +7,7 @@ public class InMemoryTransactionHistory implements TransactionHistory {
 
     private final List<Transaction> transactions;
 
-    InMemoryTransactionHistory() {
+    public InMemoryTransactionHistory() {
         this.transactions = new ArrayList<>();
     }
 
