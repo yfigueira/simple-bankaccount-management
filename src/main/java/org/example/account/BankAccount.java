@@ -18,7 +18,7 @@ public class BankAccount {
     public BankAccount(String customerName, String customerId) {
         this.customerName = customerName;
         this.customerId = customerId;
-        this.transactionHistory = new TransactionHistory();
+        this.transactionHistory = new InMemoryTransactionHistory();
         this.balance = RandomBalanceGenerator.generate();
     }
 

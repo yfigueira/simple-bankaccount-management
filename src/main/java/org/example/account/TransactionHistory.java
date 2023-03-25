@@ -2,26 +2,13 @@ package org.example.account;
 
 import org.example.transaction.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionHistory {
+public interface TransactionHistory {
 
-    private List<Transaction> transactions;
+    void save(Transaction transaction);
 
-    TransactionHistory() {
-        this.transactions = new ArrayList<>();
-    }
+    List<Transaction> getAll();
 
-    void save(Transaction transaction) {
-        transactions.add(transaction);
-    }
-
-    List<Transaction> getAll() {
-        return this.transactions;
-    }
-
-    public Transaction getLast() {
-        return transactions.get(transactions.size() - 1);
-    }
+    Transaction getLast();
 }
