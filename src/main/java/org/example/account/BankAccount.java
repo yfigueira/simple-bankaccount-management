@@ -44,4 +44,8 @@ public class BankAccount {
         deposit.setDate();
         transactionHistory.save(deposit);
     }
+
+    public Transaction getLastTransaction() {
+        return transactionHistory.getLast();
+    }
 }

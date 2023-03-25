@@ -95,4 +95,18 @@ public class BankAccountTest {
         // then
         assertThat(account.getTransactionHistory().get(0).getDate(), is(not(nullValue())));
     }
+
+    @Test
+    void getLastTransaction_ShouldReturnLastTransactionSavedInHistory() {
+        // given field account and:
+        // when
+        account.deposit(new Money(new BigDecimal("100.00")));
+        int oneHundredDepositIndex = account.getTransactionHistory().size() - 1;
+        // then
+        assertThat(account.getLastTransaction(), is(equalTo(account.getTransactionHistory().get(oneHundredDepositIndex))));
+
+        account.deposit(new Money(new BigDecimal("200.00")));
+
+        assertThat(account.getLastTransaction(), is(not(equalTo(account.getTransactionHistory().get(oneHundredDepositIndex)))));
+    }
 }

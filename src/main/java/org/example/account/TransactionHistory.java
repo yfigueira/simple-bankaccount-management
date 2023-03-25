@@ -20,4 +20,8 @@ public class TransactionHistory {
     List<Transaction> getAll() {
         return this.transactions;
     }
+
+    public Transaction getLast() {
+        return transactions.get(transactions.size() - 1);
+    }
 }
