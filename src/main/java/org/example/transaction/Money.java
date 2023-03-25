@@ -30,6 +30,10 @@ public class Money {
         return this.amount.compareTo(other.amount) > 0;
     }
 
+    boolean lessThan(Money other) {
+        return this.amount.compareTo(other.amount) < 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

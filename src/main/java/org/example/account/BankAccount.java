@@ -1,9 +1,6 @@
 package org.example.account;
 
-import org.example.transaction.InMemoryTransactionHistory;
-import org.example.transaction.Money;
-import org.example.transaction.Transaction;
-import org.example.transaction.TransactionHistory;
+import org.example.transaction.*;
 
 import java.util.List;
 
@@ -45,13 +42,21 @@ public class BankAccount {
     }
 
     public void deposit(Money amount) {
-        Transaction deposit = Transaction.deposit(balance, amount);
-        run(deposit);
+        try {
+            Transaction deposit = Transaction.deposit(balance, amount);
+            run(deposit);
+        } catch (InvalidTransactionRequestException ex) {
+            throw new UnauthorizedBankOperationException(ex.getMessage());
+        }
     }
 
     public void withdraw(Money amount) {
-        Transaction withdrawal = Transaction.withdrawal(balance, amount);
-        run(withdrawal);
+        try {
+            Transaction withdrawal = Transaction.withdrawal(balance, amount);
+            run(withdrawal);
+        } catch (InvalidTransactionRequestException | InsufficientFundsException ex) {
+            throw new UnauthorizedBankOperationException(ex.getMessage());
+        }
     }
 
     private void run(Transaction transaction) {

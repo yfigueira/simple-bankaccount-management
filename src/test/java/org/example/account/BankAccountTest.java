@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BankAccountTest {
 
@@ -121,5 +122,18 @@ public class BankAccountTest {
         account.withdraw(oneHundred);
         // then
         assertThat(account.getBalance(), is(equalTo(initialBalance)));
+    }
+
+    @Test
+    void failedTransaction_ShouldThrowUnauthorizedBankOperationException() {
+        // given field account and:
+        Money negativeAmount = new Money(new BigDecimal("-100.00"));
+
+        Money one = new Money(new BigDecimal("1.00"));
+        Money tooBigAmount = account.getBalance().plus(one);
+        // then
+        assertThrows(UnauthorizedBankOperationException.class, () -> account.deposit(negativeAmount));
+        assertThrows(UnauthorizedBankOperationException.class, () -> account.withdraw(negativeAmount));
+        assertThrows(UnauthorizedBankOperationException.class, () -> account.withdraw(tooBigAmount));
     }
 }

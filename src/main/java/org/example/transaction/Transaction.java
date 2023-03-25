@@ -1,5 +1,6 @@
 package org.example.transaction;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 
@@ -24,20 +25,20 @@ public abstract class Transaction {
 
     public abstract void run();
 
-    void setDate(Date date) {
-        this.date = date;
-    }
-
-    void setResult(Money result) {
-        this.result = result;
-    }
-
-    public static Transaction deposit(Money balance, Money amount) {
+    public static Transaction deposit(Money balance, Money amount) throws InvalidTransactionRequestException {
+        if (isNegativeValue(amount)) throw new InvalidTransactionRequestException("Negative Value");
         return new Deposit(balance, amount);
     }
 
     public static Transaction withdrawal(Money balance, Money amount) {
+        if (isNegativeValue(amount)) throw new InvalidTransactionRequestException("Negative Value");
+        if (amount.greaterThan(balance)) throw new InsufficientFundsException("Insufficient Funds");
         return new Withdrawal(balance, amount);
+    }
+
+    private static boolean isNegativeValue(Money amount) {
+        Money zero = new Money(new BigDecimal("0.00"));
+        return amount.lessThan(zero);
     }
 
     public Money getInitialBalance() {
@@ -59,6 +60,15 @@ public abstract class Transaction {
     public Money getResult() {
         return this.result;
     }
+
+    void setDate(Date date) {
+        this.date = date;
+    }
+
+    void setResult(Money result) {
+        this.result = result;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

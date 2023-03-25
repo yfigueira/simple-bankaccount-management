@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TransactionTest {
 
@@ -31,5 +32,24 @@ public class TransactionTest {
         Transaction transaction = Transaction.deposit(initialBalance, amount);
         // then
         assertThat(transaction.getDate(), is(nullValue()));
+    }
+
+    @Test
+    void requestingTransactionWithNegativeAmount_ShouldThrowInvalidTransactionRequestException() {
+        // given
+        Money balance = new Money(new BigDecimal("1000.00"));
+        Money negativeAmount = new Money(new BigDecimal("-100.00"));
+        // then
+        assertThrows(InvalidTransactionRequestException.class, () -> Transaction.deposit(balance, negativeAmount));
+        assertThrows(InvalidTransactionRequestException.class, () -> Transaction.withdrawal(balance, negativeAmount));
+    }
+
+    @Test
+    void requestingWithdrawalWithAmountHigherThanBalance_ShouldThrowInsufficientFundsException() {
+        // given
+        Money balance = new Money(new BigDecimal("100.00"));
+        Money amount = new Money(new BigDecimal("101.00"));
+        // then
+        assertThrows(InsufficientFundsException.class, () -> Transaction.withdrawal(balance, amount));
     }
 }
