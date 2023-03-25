@@ -1,5 +1,7 @@
 package org.example.transaction;
 
+import java.util.Date;
+
 public class Deposit extends Transaction {
 
     public Deposit(Money initialBalance, Money amount) {
@@ -7,7 +9,8 @@ public class Deposit extends Transaction {
     }
 
     @Override
-    public Money getResult() {
-        return getInitialBalance().plus(getAmount());
+    public void run() {
+        setDate(new Date());
+        setResult(getInitialBalance().plus(getAmount()));
     }
 }

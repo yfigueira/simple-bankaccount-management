@@ -13,15 +13,23 @@ public abstract class Transaction {
 
     private Date date;
 
+    private Money result;
+
+
     Transaction(Money initialBalance, Money amount, String type) {
         this.type = type;
         this.initialBalance = initialBalance;
         this.amount = amount;
     }
 
-    public abstract Money getResult();
-    public void setDate() {
-        this.date = new Date();
+    public abstract void run();
+
+    void setDate(Date date) {
+        this.date = date;
+    }
+
+    void setResult(Money result) {
+        this.result = result;
     }
 
     public static Transaction deposit(Money balance, Money amount) {
@@ -44,6 +52,9 @@ public abstract class Transaction {
         return this.type;
     }
 
+    public Money getResult() {
+        return this.result;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

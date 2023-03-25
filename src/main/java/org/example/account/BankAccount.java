@@ -40,8 +40,8 @@ public class BankAccount {
 
     public void deposit(Money amount) {
         Transaction deposit = Transaction.deposit(balance, amount);
+        deposit.run();
         balance = deposit.getResult();
-        deposit.setDate();
         transactionHistory.save(deposit);
     }
 
