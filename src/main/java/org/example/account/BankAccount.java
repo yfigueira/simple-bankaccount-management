@@ -38,6 +38,10 @@ public class BankAccount {
         return this.balance;
     }
 
+    public Transaction getLastTransaction() {
+        return transactionHistory.getLast();
+    }
+
     public void deposit(Money amount) {
         Transaction deposit = Transaction.deposit(balance, amount);
         deposit.run();
@@ -45,7 +49,10 @@ public class BankAccount {
         transactionHistory.save(deposit);
     }
 
-    public Transaction getLastTransaction() {
-        return transactionHistory.getLast();
+    public void withdraw(Money amount) {
+        Transaction withdrawal = Transaction.withdrawal(balance, amount);
+        withdrawal.run();
+        balance = withdrawal.getResult();
+        transactionHistory.save(withdrawal);
     }
 }

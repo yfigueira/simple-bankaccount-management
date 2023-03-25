@@ -22,7 +22,7 @@ public class Money {
         return new Money(this.amount.add(augend.amount));
     }
 
-    Money minus(Money subtrahend) {
+    public Money minus(Money subtrahend) {
         return new Money(this.amount.subtract(subtrahend.amount));
     }
 

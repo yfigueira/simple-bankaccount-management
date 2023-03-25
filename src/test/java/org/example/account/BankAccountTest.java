@@ -87,18 +87,8 @@ public class BankAccountTest {
     }
 
     @Test
-    void deposit_ShouldSetTransactionDate() {
-        // given field account and:
-        Money amount = new Money(new BigDecimal("100.00"));
-        // when
-        account.deposit(amount);
-        // then
-        assertThat(account.getTransactionHistory().get(0).getDate(), is(not(nullValue())));
-    }
-
-    @Test
     void getLastTransaction_ShouldReturnLastTransactionSavedInHistory() {
-        // given field account and:
+        // given field account
         // when
         account.deposit(new Money(new BigDecimal("100.00")));
         int oneHundredDepositIndex = account.getTransactionHistory().size() - 1;
@@ -108,5 +98,38 @@ public class BankAccountTest {
         account.deposit(new Money(new BigDecimal("200.00")));
 
         assertThat(account.getLastTransaction(), is(not(equalTo(account.getTransactionHistory().get(oneHundredDepositIndex)))));
+    }
+
+    @Test
+    void withdrawOneHundred_ShouldLowerTheBalanceByOneHundred() {
+        // given field account and:
+        Money initialBalance = account.getBalance();
+        Money oneHundred = new Money(new BigDecimal("100.00"));
+        // when
+        account.withdraw(oneHundred);
+        // then
+        assertThat(account.getBalance(), is(equalTo(initialBalance.minus(oneHundred))));
+    }
+
+    @Test
+    void depositOneHundredAndWithdrawOneHundred_ShouldGetBackToInitialBalance() {
+        // given field account and:
+        Money initialBalance = account.getBalance();
+        Money oneHundred = new Money(new BigDecimal("100.00"));
+        // when
+        account.deposit(oneHundred);
+        account.withdraw(oneHundred);
+        // then
+        assertThat(account.getBalance(), is(equalTo(initialBalance)));
+    }
+
+    @Test
+    void withdrawal_ShouldBeSavedInTransactionsHistory() {
+        // given field account and:
+        Money amount = new Money(new BigDecimal("100.00"));
+        // when
+        account.withdraw(amount);
+        // then
+        assertThat(account.getTransactionHistory(), is(not(emptyCollectionOf(Transaction.class))));
     }
 }

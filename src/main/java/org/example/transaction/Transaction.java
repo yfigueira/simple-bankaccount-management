@@ -36,6 +36,10 @@ public abstract class Transaction {
         return new Deposit(balance, amount);
     }
 
+    public static Transaction withdrawal(Money balance, Money amount) {
+        return new Withdrawal(balance, amount);
+    }
+
     public Money getInitialBalance() {
         return this.initialBalance;
     }
