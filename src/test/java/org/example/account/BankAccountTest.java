@@ -44,7 +44,7 @@ public class BankAccountTest {
     void whenInitialized_ShouldHaveEmptyTransactionsHistory() {
         // given fields customerName, customerId and account
         // then
-        assertThat(account.getTransactions(), is(emptyCollectionOf(Transaction.class)));
+        assertThat(account.getTransactionHistory(), is(emptyCollectionOf(Transaction.class)));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class BankAccountTest {
         // when
         account.deposit(amount);
         // then
-        assertThat(account.getTransactions(), is(not(emptyCollectionOf(Transaction.class))));
+        assertThat(account.getTransactionHistory(), is(not(emptyCollectionOf(Transaction.class))));
     }
 
     @Test
@@ -93,6 +93,6 @@ public class BankAccountTest {
         // when
         account.deposit(amount);
         // then
-        assertThat(account.getTransactions().get(0).getDate(), is(not(nullValue())));
+        assertThat(account.getTransactionHistory().get(0).getDate(), is(not(nullValue())));
     }
 }
