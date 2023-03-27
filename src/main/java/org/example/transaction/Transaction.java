@@ -1,6 +1,7 @@
 package org.example.transaction;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,7 +13,7 @@ public abstract class Transaction {
 
     private final Money amount;
 
-    private Date date;
+    private LocalDateTime date;
 
     private Money result;
 
@@ -36,6 +37,10 @@ public abstract class Transaction {
         return new Withdrawal(balance, amount);
     }
 
+    public static Transaction nullTransaction() {
+        return NullTransaction.getInstance();
+    }
+
     private static boolean isNegativeValue(Money amount) {
         Money zero = new Money(new BigDecimal("0.00"));
         return amount.lessThan(zero);
@@ -49,7 +54,7 @@ public abstract class Transaction {
         return this.amount;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return this.date;
     }
 
@@ -61,7 +66,11 @@ public abstract class Transaction {
         return this.result;
     }
 
-    void setDate(Date date) {
+    public boolean isNull() {
+        return false;
+    }
+
+    void setDate(LocalDateTime date) {
         this.date = date;
     }
 

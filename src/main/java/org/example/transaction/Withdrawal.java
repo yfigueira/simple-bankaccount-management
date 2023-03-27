@@ -1,5 +1,6 @@
 package org.example.transaction;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Withdrawal extends Transaction{
@@ -10,7 +11,7 @@ public class Withdrawal extends Transaction{
 
     @Override
     public void run() {
-        setDate(new Date());
+        setDate(LocalDateTime.now());
         setResult(getInitialBalance().minus(getAmount()));
     }
 }
