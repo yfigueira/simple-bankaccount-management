@@ -24,16 +24,13 @@ public abstract class Transaction {
         this.amount = amount;
     }
 
-    public abstract void run();
+    public abstract void run() throws InvalidTransactionRequestException;
 
     public static Transaction deposit(Money balance, Money amount) throws InvalidTransactionRequestException {
-        if (isNegativeValue(amount)) throw new InvalidTransactionRequestException("Negative Value");
         return new Deposit(balance, amount);
     }
 
     public static Transaction withdrawal(Money balance, Money amount) {
-        if (isNegativeValue(amount)) throw new InvalidTransactionRequestException("Negative Value");
-        if (amount.greaterThan(balance)) throw new InsufficientFundsException("Insufficient Funds");
         return new Withdrawal(balance, amount);
     }
 
@@ -41,7 +38,7 @@ public abstract class Transaction {
         return NullTransaction.getInstance();
     }
 
-    private static boolean isNegativeValue(Money amount) {
+    static boolean isNegativeValue(Money amount) {
         Money zero = new Money(new BigDecimal("0.00"));
         return amount.lessThan(zero);
     }

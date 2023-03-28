@@ -11,6 +11,7 @@ public class Deposit extends Transaction {
 
     @Override
     public void run() {
+        if (isNegativeValue(getAmount())) throw new InvalidTransactionRequestException("Negative Value");
         setDate(LocalDateTime.now());
         setResult(getInitialBalance().plus(getAmount()));
     }

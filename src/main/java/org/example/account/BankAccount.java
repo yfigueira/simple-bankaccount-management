@@ -42,26 +42,22 @@ public class BankAccount {
     }
 
     public void deposit(Money amount) {
-        try {
-            Transaction deposit = Transaction.deposit(balance, amount);
-            run(deposit);
-        } catch (InvalidTransactionRequestException ex) {
-            throw new UnauthorizedBankOperationException(ex.getMessage());
-        }
+        Transaction deposit = Transaction.deposit(balance, amount);
+        run(deposit);
     }
 
     public void withdraw(Money amount) {
-        try {
-            Transaction withdrawal = Transaction.withdrawal(balance, amount);
-            run(withdrawal);
-        } catch (InvalidTransactionRequestException | InsufficientFundsException ex) {
-            throw new UnauthorizedBankOperationException(ex.getMessage());
-        }
+        Transaction withdrawal = Transaction.withdrawal(balance, amount);
+        run(withdrawal);
     }
 
     private void run(Transaction transaction) {
-        transaction.run();
-        balance = transaction.getResult();
-        transactionHistory.save(transaction);
+        try {
+            transaction.run();
+            balance = transaction.getResult();
+            transactionHistory.save(transaction);
+        } catch (InvalidTransactionRequestException ex) {
+            throw new UnauthorizedBankOperationException(ex.getMessage());
+        }
     }
 }

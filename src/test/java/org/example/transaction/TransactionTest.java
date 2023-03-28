@@ -40,8 +40,8 @@ public class TransactionTest {
         Money balance = new Money(new BigDecimal("1000.00"));
         Money negativeAmount = new Money(new BigDecimal("-100.00"));
         // then
-        assertThrows(InvalidTransactionRequestException.class, () -> Transaction.deposit(balance, negativeAmount));
-        assertThrows(InvalidTransactionRequestException.class, () -> Transaction.withdrawal(balance, negativeAmount));
+        assertThrows(InvalidTransactionRequestException.class, () -> Transaction.deposit(balance, negativeAmount).run());
+        assertThrows(InvalidTransactionRequestException.class, () -> Transaction.withdrawal(balance, negativeAmount).run());
     }
 
     @Test
@@ -50,6 +50,6 @@ public class TransactionTest {
         Money balance = new Money(new BigDecimal("100.00"));
         Money amount = new Money(new BigDecimal("101.00"));
         // then
-        assertThrows(InsufficientFundsException.class, () -> Transaction.withdrawal(balance, amount));
+        assertThrows(InvalidTransactionRequestException.class, () -> Transaction.withdrawal(balance, amount).run());
     }
 }
