@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BankAccountTest {
@@ -148,5 +149,34 @@ public class BankAccountTest {
         Money tooBigAmount = account.getBalance().plus(one);
         // then
         assertThrows(UnauthorizedBankOperationException.class, () -> account.withdraw(tooBigAmount));
+    }
+
+    @Test
+    void transactionExceedingAccountLimit_ShouldThrowUnauthorizedBankOperationException() {
+        // given field account and:
+        Money moreThanInitialAccountLimit = new Money(new BigDecimal("1001.00"));
+        // then
+        assertThrows(UnauthorizedBankOperationException.class, () -> account.deposit(moreThanInitialAccountLimit));
+        assertThrows(UnauthorizedBankOperationException.class, () -> account.withdraw(moreThanInitialAccountLimit));
+    }
+
+    @Test
+    void settingAccountDepositLimitToTwoThousand_ShouldAllowMakingDepositOfTwoThousand() {
+        // given field account and:
+        Money twoThousand = new Money(new BigDecimal("2000.00"));
+        // when
+        account.setDepositLimit(twoThousand);
+        // then
+        assertDoesNotThrow(() -> account.deposit(twoThousand));
+    }
+
+    @Test
+    void settingAccountWithdrawalLimitToTwoThousand_ShouldAllowMakingWithdrawalOfTwoThousand() {
+        // given field account and:
+        Money twoThousand = new Money(new BigDecimal("2000.00"));
+        // when
+        account.setWithdrawalLimit(twoThousand);
+        // then
+        assertDoesNotThrow(() -> account.withdraw(twoThousand));
     }
 }
