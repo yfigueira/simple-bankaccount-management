@@ -45,7 +45,7 @@ public class TransactionTest {
     }
 
     @Test
-    void requestingWithdrawalWithAmountHigherThanBalance_ShouldThrowInsufficientFundsException() {
+    void requestingWithdrawalWithAmountHigherThanBalance_ShouldThrowInvalidTransactionRequestException() {
         // given
         Money balance = new Money(new BigDecimal("100.00"));
         Money amount = new Money(new BigDecimal("101.00"));
