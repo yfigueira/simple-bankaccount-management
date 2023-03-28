@@ -24,6 +24,13 @@ public class InMemoryTransactionHistoryTest {
     }
 
     @Test
+    void whenInitialized_ShouldBeEmpty() {
+        // given field history
+        // then
+        assertThat(history.getAll(), is(emptyCollectionOf(Transaction.class)));
+    }
+
+    @Test
     void afterSave_ShouldNotBeEmpty() {
         // given field history and:
         Money balance = new Money(new BigDecimal("1000.00"));
@@ -66,17 +73,16 @@ public class InMemoryTransactionHistoryTest {
     }
 
     @Test
-    void requestingLastTransactionFromEmptyHistory_ShouldReturnNullTransactionObject() {
+    void requestingLastTransactionFromEmptyHistory_ShouldReturnNull() {
         // given field history
         // then
-        assertThat(history.getLast().getType(), is(equalTo("undefined")));
+        assertThat(history.getLast(), is(equalTo(null)));
     }
 
     @Test
-    void requestingAllTransactionsFromEmptyTransactionHistory_ShouldReturnListWithOneNullTransactionObject() {
+    void requestingAllTransactionsFromEmptyTransactionHistory_ShouldReturnEmptyListOfTransactions() {
         // given field history
         // then
-        assertThat(history.getAll(), is(not(emptyCollectionOf(Transaction.class))));
-        assertThat(history.getAll().get(0).getType(), is(equalTo("undefined")));
+        assertThat(history.getAll(), is(emptyCollectionOf(Transaction.class)));
     }
 }

@@ -33,10 +33,6 @@ public abstract class Transaction {
         return new Withdrawal(balance, amount);
     }
 
-    public static Transaction nullTransaction() {
-        return NullTransaction.getInstance();
-    }
-
     static boolean isNegativeValue(Money amount) {
         Money zero = new Money(new BigDecimal("0.00"));
         return amount.lessThan(zero);
@@ -60,10 +56,6 @@ public abstract class Transaction {
 
     public Money getResult() {
         return this.result;
-    }
-
-    public boolean isNull() {
-        return false;
     }
 
     void setDate(LocalDateTime date) {

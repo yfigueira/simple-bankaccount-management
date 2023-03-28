@@ -18,13 +18,12 @@ public class InMemoryTransactionHistory implements TransactionHistory {
 
     @Override
     public List<Transaction> getAll() {
-        if (transactions.isEmpty()) return List.of(Transaction.nullTransaction());
         return transactions;
     }
 
     @Override
     public Transaction getLast() {
-        if (transactions.isEmpty()) return Transaction.nullTransaction();
+        if (transactions.isEmpty()) return null;
         return transactions.get(transactions.size() - 1);
     }
 }
