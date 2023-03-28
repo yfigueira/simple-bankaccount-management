@@ -133,15 +133,20 @@ public class BankAccountTest {
     }
 
     @Test
-    void failedTransaction_ShouldThrowUnauthorizedBankOperationException() {
+    void transactionWithNegativeAmount_ShouldThrowUnauthorizedBankOperationException() {
         // given field account and:
         Money negativeAmount = new Money(new BigDecimal("-100.00"));
-
-        Money one = new Money(new BigDecimal("1.00"));
-        Money tooBigAmount = account.getBalance().plus(one);
         // then
         assertThrows(UnauthorizedBankOperationException.class, () -> account.deposit(negativeAmount));
         assertThrows(UnauthorizedBankOperationException.class, () -> account.withdraw(negativeAmount));
+    }
+
+    @Test
+    void withdrawalWithAmountGreaterThanBalance_ShouldThrowUnauthorizedOperationException() {
+        // given field account and:
+        Money one = new Money(new BigDecimal("1.00"));
+        Money tooBigAmount = account.getBalance().plus(one);
+        // then
         assertThrows(UnauthorizedBankOperationException.class, () -> account.withdraw(tooBigAmount));
     }
 }
