@@ -1,7 +1,6 @@
 package org.example.transaction;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Deposit extends Transaction {
 
