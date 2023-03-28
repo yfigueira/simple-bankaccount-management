@@ -13,13 +13,13 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class AccountLimitsTest {
+public class AccountLimitTest {
 
-    private AccountLimits limits;
+    private AccountLimit limits;
 
     @BeforeEach
     void setUp() {
-        limits = new AccountLimits();
+        limits = new AccountLimit();
     }
 
     @AfterEach
@@ -28,31 +28,21 @@ public class AccountLimitsTest {
     }
 
     @Test
-    void whenInitialized_ShouldHaveDepositLimitEqualToOneThousand() {
+    void whenInitialized_ShouldHaveLimitEqualToOneThousand() {
         // given field limits and:
         Money oneThousand = new Money(new BigDecimal("1000.00"));
         // then
-        assertThat(limits.getDepositLimit(), is(equalTo(oneThousand)));
+        assertThat(limits.getTransactionLimit(), is(equalTo(oneThousand)));
     }
 
     @Test
-    void whenInitialized_ShouldHaveWithdrawalLimitEqualToOneThousand() {
-        // given field limits and:
-        Money oneThousand = new Money(new BigDecimal("1000.00"));
-        // then
-        assertThat(limits.getWithdrawalLimit(), is(equalTo(oneThousand)));
-    }
-
-    @Test
-    void settingLimitsToTwoThousand_ShouldChangeLimitsToTwoThousand() {
+    void settingLimitToTwoThousand_ShouldChangeLimitToTwoThousand() {
         // given field limits and:
         Money twoThousand = new Money(new BigDecimal("2000.00"));
         // when
-        limits.setDepositLimit(twoThousand);
-        limits.setWithdrawalLimit(twoThousand);
+        limits.setTransactionLimit(twoThousand);
         // then
-        assertThat(limits.getDepositLimit(), is(equalTo(twoThousand)));
-        assertThat(limits.getWithdrawalLimit(), is(equalTo(twoThousand)));
+        assertThat(limits.getTransactionLimit(), is(equalTo(twoThousand)));
     }
 
     @Test
@@ -60,12 +50,11 @@ public class AccountLimitsTest {
         // given field limits and:
         Money minusOne = new Money(new BigDecimal("-1.00"));
         // then
-        assertThrows(UnauthorizedBankOperationException.class, () -> limits.setWithdrawalLimit(minusOne));
-        assertThrows(UnauthorizedBankOperationException.class, () -> limits.setDepositLimit(minusOne));
+        assertThrows(UnauthorizedBankOperationException.class, () -> limits.setTransactionLimit(minusOne));
     }
 
     @Test
-    void validatingTransactionWithAmountOverLimits_ShouldThrowAccountLimitsExceededException() {
+    void validatingTransactionWithAmountOverLimit_ShouldThrowAccountLimitsExceededException() {
         // given field limits and:
         Money initialBalance = new Money(new BigDecimal("3000.00"));
         Money moreThanOneThousand = new Money(new BigDecimal("1001.00"));
@@ -73,12 +62,12 @@ public class AccountLimitsTest {
         Transaction deposit = Transaction.deposit(initialBalance, moreThanOneThousand);
         Transaction withdrawal = Transaction.withdrawal(initialBalance, moreThanOneThousand);
         // then
-        assertThrows(AccountLimitsExceededException.class, () -> limits.validate(deposit));
-        assertThrows(AccountLimitsExceededException.class, () -> limits.validate(withdrawal));
+        assertThrows(AccountLimitExceededException.class, () -> limits.validate(deposit));
+        assertThrows(AccountLimitExceededException.class, () -> limits.validate(withdrawal));
     }
 
     @Test
-    void validatingTransactionWithAmountWithinLimits_ShouldNotThrowAccountLimitsExceededException() {
+    void validatingTransactionWithAmountWithinLimit_ShouldNotThrowAccountLimitsExceededException() {
         // given field limits and:
         Money initialBalance = new Money(new BigDecimal("3000.00"));
         Money lessThanOneThousand = new Money(new BigDecimal("999.00"));
