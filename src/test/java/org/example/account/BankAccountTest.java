@@ -56,6 +56,14 @@ public class BankAccountTest {
     }
 
     @Test
+    void initialBalance_ShouldNotBeLessThanOneHundred() {
+        // given field account and:
+        Money oneHundred = new Money(new BigDecimal("100.00"));
+        // then
+        assertThat(account.getBalance().greaterThan(oneHundred), is(true));
+    }
+
+    @Test
     void depositOneHundred_ShouldRaiseTheBalanceByOneHundred() {
         // given field account and:
         Money initialBalance = account.getBalance();

@@ -26,11 +26,11 @@ public class Money {
         return new Money(this.amount.subtract(subtrahend.amount));
     }
 
-    boolean greaterThan(Money other) {
+    public boolean greaterThan(Money other) {
         return this.amount.compareTo(other.amount) > 0;
     }
 
-    boolean lessThan(Money other) {
+    public boolean lessThan(Money other) {
         return this.amount.compareTo(other.amount) < 0;
     }
 
