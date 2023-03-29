@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public abstract class Transaction {
 
-    private final String type;
+    private final TransactionType type;
 
     private final Money initialBalance;
 
@@ -17,7 +17,7 @@ public abstract class Transaction {
     private Money result;
 
 
-    Transaction(Money initialBalance, Money amount, String type) {
+    Transaction(Money initialBalance, Money amount, TransactionType type) {
         this.type = type;
         this.initialBalance = initialBalance;
         this.amount = amount;
@@ -50,7 +50,7 @@ public abstract class Transaction {
         return this.date;
     }
 
-    public String getType() {
+    public TransactionType getType() {
         return this.type;
     }
 

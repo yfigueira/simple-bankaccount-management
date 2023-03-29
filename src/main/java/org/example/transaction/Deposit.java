@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Deposit extends Transaction {
 
     public Deposit(Money initialBalance, Money amount) {
-        super(initialBalance, amount, "deposit");
+        super(initialBalance, amount, TransactionType.DEPOSIT);
     }
 
     @Override
