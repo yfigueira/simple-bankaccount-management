@@ -1,5 +1,7 @@
 package org.example.transaction;
 
+import org.example.money.Money;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;

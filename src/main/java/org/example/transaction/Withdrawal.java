@@ -1,5 +1,7 @@
 package org.example.transaction;
 
+import org.example.money.Money;
+
 import java.time.LocalDateTime;
 
 public class Withdrawal extends Transaction{

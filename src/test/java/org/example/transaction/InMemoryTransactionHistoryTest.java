@@ -1,5 +1,6 @@
 package org.example.transaction;
 
+import org.example.money.Money;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

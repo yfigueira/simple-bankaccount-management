@@ -1,6 +1,6 @@
 package org.example.account;
 
-import org.example.transaction.Money;
+import org.example.money.Money;
 import org.example.transaction.Transaction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package org.example.transaction;
+package org.example.money;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

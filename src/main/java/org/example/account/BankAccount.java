@@ -1,5 +1,6 @@
 package org.example.account;
 
+import org.example.money.Money;
 import org.example.transaction.*;
 
 import java.math.BigDecimal;
