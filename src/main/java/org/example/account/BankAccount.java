@@ -19,10 +19,10 @@ public class BankAccount {
 
     private final AccountLimit withdrawalLimit;
 
-    public BankAccount(String customerName, String customerId) {
+    public BankAccount(String customerName, String customerId, TransactionHistory transactionHistory) {
         this.customerName = customerName;
         this.customerId = customerId;
-        this.transactionHistory = new InMemoryTransactionHistory();
+        this.transactionHistory = transactionHistory;
         this.depositLimit = new AccountLimit();
         this.withdrawalLimit = new AccountLimit();
         this.balance = new Money(new BigDecimal("3000.00"));

@@ -1,5 +1,6 @@
 package org.example.account;
 
+import org.example.transaction.InMemoryTransactionHistory;
 import org.example.transaction.Money;
 import org.example.transaction.Transaction;
 import org.junit.jupiter.api.AfterEach;
@@ -25,7 +26,7 @@ public class BankAccountTest {
     void setUp() {
         this.customerName = "John";
         this.customerId = "id-123";
-        this.account = new BankAccount(customerName, customerId);
+        this.account = new BankAccount(customerName, customerId, new InMemoryTransactionHistory());
     }
 
     @AfterEach
