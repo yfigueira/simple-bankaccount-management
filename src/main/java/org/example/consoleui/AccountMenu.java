@@ -19,9 +19,12 @@ public class AccountMenu {
 
     private final TransactionRunningMenu transactionRunningMenu;
 
+    private final TransactionHistoryMenu transactionHistoryMenu;
+
     public AccountMenu(String customerName, String customerId) {
         this.bankAccount = new BankAccount(customerName, customerId, new InMemoryTransactionHistory());
         this.transactionRunningMenu = new TransactionRunningMenu(bankAccount);
+        this.transactionHistoryMenu = new TransactionHistoryMenu(bankAccount);
     }
 
     public void run() {
@@ -64,6 +67,11 @@ public class AccountMenu {
                 openTransactionRunningMenu();
                 System.out.println(OPTIONS_SEPARATOR);
                 break;
+            case "c":
+                System.out.println(OPTIONS_SEPARATOR);
+                openTransactionHistoryMenu();
+                System.out.println(OPTIONS_SEPARATOR);
+                break;
             case "e":
                 exit();
                 break;
@@ -83,6 +91,10 @@ public class AccountMenu {
 
     private void openTransactionRunningMenu() {
         transactionRunningMenu.run();
+    }
+
+    private void openTransactionHistoryMenu() {
+        transactionHistoryMenu.run();
     }
 
     private void exit() {
