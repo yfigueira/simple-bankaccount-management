@@ -35,8 +35,6 @@ public class Login {
 
         System.out.println("Enter your customer ID and press 'Enter' to confirm:");
         customerId = scanner.nextLine();
-
-        scanner.close();
     }
 
     private static void printConfirmation() {
