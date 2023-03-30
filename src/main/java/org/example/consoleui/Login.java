@@ -7,11 +7,19 @@ public class Login {
     private static final String MAIN_SEPARATOR =
             "****************************************************************************************************";
 
-    private static String customerName;
+    private String customerName;
 
-    private static String customerId;
+    private String customerId;
 
-    public static void run() {
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void run() {
         System.out.println(MAIN_SEPARATOR);
         printWelcomeMessage();
         System.out.println(MAIN_SEPARATOR);
@@ -23,11 +31,11 @@ public class Login {
         System.out.println(MAIN_SEPARATOR);
     }
 
-    static private void printWelcomeMessage() {
+    static void printWelcomeMessage() {
         System.out.println("\n                                       Welcome To Simple Bank                                       \n");
     }
 
-    private static void askForCredentials() {
+    private void askForCredentials() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter your name and press 'Enter' to confirm:");
@@ -37,7 +45,7 @@ public class Login {
         customerId = scanner.nextLine();
     }
 
-    private static void printConfirmation() {
+    private void printConfirmation() {
         StringBuilder sb = new StringBuilder("\nCustomer ID: ")
                 .append(customerId)
                 .append(" confirmed. Welcome ")
