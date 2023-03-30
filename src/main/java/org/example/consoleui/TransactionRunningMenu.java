@@ -1,30 +1,25 @@
 package org.example.consoleui;
 
 import org.example.account.BankAccount;
-import org.example.transaction.InMemoryTransactionHistory;
+import org.example.money.Money;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
-public class AccountMenu {
-
-    private static final String MAIN_SEPARATOR =
-            "****************************************************************************************************";
+public class TransactionRunningMenu {
 
     private static final String OPTIONS_SEPARATOR =
             "----------------------------------------------------------------------------------------------------";
 
-    private final Scanner scanner = new Scanner(System.in);
-
     private final BankAccount bankAccount;
 
-    private final TransactionRunningMenu transactionRunningMenu;
+    private final Scanner scanner = new Scanner(System.in);
 
-    public AccountMenu(String customerName, String customerId) {
-        this.bankAccount = new BankAccount(customerName, customerId, new InMemoryTransactionHistory());
-        this.transactionRunningMenu = new TransactionRunningMenu(bankAccount);
+    TransactionRunningMenu(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
     }
 
-    public void run() {
+    void run() {
 
         String selectedOption = "";
 
@@ -32,17 +27,14 @@ public class AccountMenu {
             printOptions();
             selectedOption = readUserSelection();
             perform(selectedOption);
-
-        } while (!selectedOption.equalsIgnoreCase("e"));
+        } while (!selectedOption.equalsIgnoreCase("c"));
     }
 
     private void printOptions() {
         StringBuilder sb = new StringBuilder("\nOptions:")
-                .append("\n\ta: Check Account Balance")
-                .append("\n\tb: Perform Transaction")
-                .append("\n\tc: Transactions History")
-                .append("\n\td: Account Settings")
-                .append("\n\te: Exit");
+                .append("\n\ta: Deposit Funds")
+                .append("\n\tb: Withdraw Funds")
+                .append("\n\tc: Return");
 
         System.out.println(sb.toString());
     }
@@ -56,20 +48,53 @@ public class AccountMenu {
         switch (selected) {
             case "a":
                 System.out.println(OPTIONS_SEPARATOR);
-                printAccountBalance();
+                runDeposit();
                 System.out.println(OPTIONS_SEPARATOR);
                 break;
             case "b":
                 System.out.println(OPTIONS_SEPARATOR);
-                openTransactionRunningMenu();
+                runWithdrawal();
                 System.out.println(OPTIONS_SEPARATOR);
                 break;
-            case "e":
-                exit();
+            case "c":
                 break;
             default:
                 System.out.println("Select an option to continue");
         }
+    }
+
+    private void runDeposit() {
+        System.out.println("Enter an amount:");
+        Money amount = readAmount();
+        bankAccount.deposit(amount);
+        printAccountBalance();
+    }
+
+    private void runWithdrawal() {
+        System.out.println("Enter an amount:");
+        Money amount = readAmount();
+        bankAccount.withdraw(amount);
+        printAccountBalance();
+    }
+
+    private Money readAmount() {
+        boolean validInput = false;
+        Money money = null;
+
+        do {
+            String value = scanner.nextLine().trim();
+
+            try {
+                BigDecimal amount = new BigDecimal(value);
+                money = new Money(amount);
+                validInput = true;
+            } catch (NumberFormatException ex) {
+                System.out.println("Enter a number to continue. Use '.' as the decimal separator.");
+            }
+
+        } while (!validInput);
+
+        return money;
     }
 
     private void printAccountBalance() {
@@ -79,17 +104,5 @@ public class AccountMenu {
                 .append(bankAccount.getBalance().getCurrency());
 
         System.out.println(sb.toString());
-    }
-
-    private void openTransactionRunningMenu() {
-        transactionRunningMenu.run();
-    }
-
-    private void exit() {
-        System.out.println(MAIN_SEPARATOR);
-        System.out.println("                                  Thank You For Using Simple Bank!");
-        System.out.println(MAIN_SEPARATOR);
-
-        scanner.close();
     }
 }
