@@ -1,6 +1,7 @@
 package org.example.consoleui;
 
 import org.example.account.BankAccount;
+import org.example.account.UnauthorizedBankOperationException;
 import org.example.money.Money;
 
 import java.math.BigDecimal;
@@ -66,15 +67,25 @@ public class TransactionRunningMenu {
     private void runDeposit() {
         System.out.println("Enter an amount:");
         Money amount = readAmount();
-        bankAccount.deposit(amount);
-        printAccountBalance();
+
+        try {
+            bankAccount.deposit(amount);
+            printAccountBalance();
+        } catch (UnauthorizedBankOperationException ex) {
+            System.out.println("Transaction failed: " + ex.getMessage());
+        }
     }
 
     private void runWithdrawal() {
         System.out.println("Enter an amount:");
         Money amount = readAmount();
-        bankAccount.withdraw(amount);
-        printAccountBalance();
+
+        try {
+            bankAccount.withdraw(amount);
+            printAccountBalance();
+        } catch (UnauthorizedBankOperationException ex) {
+            System.out.println("Transaction failed: " + ex.getMessage());
+        }
     }
 
     private Money readAmount() {
