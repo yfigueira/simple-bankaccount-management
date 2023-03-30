@@ -1,5 +1,8 @@
 package org.example.consoleui;
 
+import org.example.account.BankAccount;
+import org.example.transaction.InMemoryTransactionHistory;
+
 import java.util.Scanner;
 
 public class AccountMenu {
@@ -7,9 +10,18 @@ public class AccountMenu {
     private static final String MAIN_SEPARATOR =
             "****************************************************************************************************";
 
-    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String OPTIONS_SEPARATOR =
+            "----------------------------------------------------------------------------------------------------";
 
-    public static void run() {
+    private final Scanner scanner = new Scanner(System.in);
+
+    private final BankAccount bankAccount;
+
+    public AccountMenu(String customerName, String customerId) {
+        this.bankAccount = new BankAccount(customerName, customerId, new InMemoryTransactionHistory());;
+    }
+
+    public void run() {
 
         String selectedOption = "";
 
@@ -21,7 +33,7 @@ public class AccountMenu {
         } while (!selectedOption.equalsIgnoreCase("e"));
     }
 
-    private static void printOptions() {
+    private void printOptions() {
         StringBuilder sb = new StringBuilder("\nOptions:")
                 .append("\n\ta: Check Account Balance")
                 .append("\n\tb: Perform Transaction")
@@ -32,13 +44,18 @@ public class AccountMenu {
         System.out.println(sb.toString());
     }
 
-    private static String readUserSelection() {
+    private String readUserSelection() {
         System.out.println("\nSelect An Option And Press Enter:");
-        return SCANNER.nextLine().trim();
+        return scanner.nextLine().trim();
     }
 
-    private static void perform(String selected) {
+    private void perform(String selected) {
         switch (selected) {
+            case "a":
+                System.out.println(OPTIONS_SEPARATOR);
+                printAccountBalance();
+                System.out.println(OPTIONS_SEPARATOR);
+                break;
             case "e":
                 exit();
                 break;
@@ -47,11 +64,21 @@ public class AccountMenu {
         }
     }
 
-    private static void exit() {
+    private void printAccountBalance() {
+        StringBuilder sb = new StringBuilder("                                        Balance:\t")
+                .append(bankAccount.getBalance().getAmount())
+                .append("\t")
+                .append(bankAccount.getBalance().getCurrency())
+                .append("                                        ");
+
+        System.out.println(sb.toString());
+    }
+
+    private void exit() {
         System.out.println(MAIN_SEPARATOR);
         System.out.println("                                  Thank You For Using Simple Bank!                                  ");
         System.out.println(MAIN_SEPARATOR);
 
-        SCANNER.close();
+        scanner.close();
     }
 }

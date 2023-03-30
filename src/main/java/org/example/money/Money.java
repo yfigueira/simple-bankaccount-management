@@ -14,8 +14,12 @@ public class Money {
         this.currency = "USD";
     }
 
-    BigDecimal getAmount() {
+    public BigDecimal getAmount() {
         return this.amount;
+    }
+
+    public String getCurrency() {
+        return currency;
     }
 
     public Money plus(Money augend) {
