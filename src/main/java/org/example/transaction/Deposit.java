@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class Deposit extends Transaction {
 
-    public Deposit(Money initialBalance, Money amount) {
+    Deposit(Money initialBalance, Money amount) {
         super(initialBalance, amount, TransactionType.DEPOSIT);
     }
 

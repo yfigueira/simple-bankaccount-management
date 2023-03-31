@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class Withdrawal extends Transaction{
 
-    public Withdrawal(Money initialBalance, Money amount) {
+    Withdrawal(Money initialBalance, Money amount) {
         super(initialBalance, amount, TransactionType.WITHDRAWAL);
     }
 
