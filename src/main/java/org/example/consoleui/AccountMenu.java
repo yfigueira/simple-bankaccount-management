@@ -109,7 +109,7 @@ public class AccountMenu {
 
     private void exit() {
         System.out.println(MAIN_SEPARATOR);
-        System.out.println("                                  Thank You For Using Simple Bank!");
+        System.out.println("\n                                  Thank You For Using Simple Bank!\n");
         System.out.println(MAIN_SEPARATOR);
 
         scanner.close();
