@@ -3,7 +3,6 @@ package org.example.consoleui;
 import org.example.account.BankAccount;
 import org.example.money.Money;
 import org.example.transaction.Transaction;
-import org.example.transaction.TransactionHistory;
 import org.example.transaction.TransactionType;
 
 import java.time.LocalDateTime;
@@ -28,9 +27,9 @@ public class TransactionHistoryMenu {
         this.bankAccount = bankAccount;
     }
 
-    public void run() {
+    void run() {
 
-        String selectedOption = "";
+        String selectedOption;
 
         do {
             printOptions();
@@ -40,12 +39,12 @@ public class TransactionHistoryMenu {
     }
 
     private void printOptions() {
-        StringBuilder sb = new StringBuilder("\nOptions:")
-                .append("\n\ta: See Last Transaction")
-                .append("\n\tb: See All Transactions")
-                .append("\n\tc: Return");
+        StringBuilder sb = new StringBuilder("\n                                            Options:")
+                .append("\n                                                a: See Last Transaction")
+                .append("\n                                                b: See All Transactions")
+                .append("\n                                                c: Return");
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 
     private String readUserSelection() {

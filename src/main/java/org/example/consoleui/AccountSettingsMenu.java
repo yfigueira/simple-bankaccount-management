@@ -13,7 +13,7 @@ public class AccountSettingsMenu {
     private static final String OPTIONS_SEPARATOR =
             "----------------------------------------------------------------------------------------------------";
 
-    BankAccount bankAccount;
+    private final BankAccount bankAccount;
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -24,7 +24,7 @@ public class AccountSettingsMenu {
 
     void run() {
 
-        String selectedOption = "";
+        String selectedOption;
 
         do {
             printOptions();
@@ -40,7 +40,7 @@ public class AccountSettingsMenu {
                 .append("\n                                                c: Change Withdrawal Limit")
                 .append("\n                                                d: Return");
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 
     private String readUserSelection() {
@@ -83,7 +83,7 @@ public class AccountSettingsMenu {
                 .append(getFormattedAccountLimit(withdrawalLimit))
                 .append("\n");
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 
     private void changeTransactionLimit(AccountLimit accountLimit) {

@@ -22,7 +22,7 @@ public class TransactionRunningMenu {
 
     void run() {
 
-        String selectedOption = "";
+        String selectedOption;
 
         do {
             printOptions();
@@ -37,7 +37,7 @@ public class TransactionRunningMenu {
                 .append("\n                                                b: Withdraw Funds")
                 .append("\n                                                c: Return");
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 
     private String readUserSelection() {
@@ -115,6 +115,6 @@ public class TransactionRunningMenu {
                 .append(bankAccount.getBalance().getCurrency())
                 .append("\n");
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 }

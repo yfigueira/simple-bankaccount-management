@@ -32,7 +32,7 @@ public class AccountMenu {
 
     public void run() {
 
-        String selectedOption = "";
+        String selectedOption;
 
         do {
             printOptions();
@@ -60,31 +60,28 @@ public class AccountMenu {
 
     private void perform(String selected) {
         switch (selected) {
-            case "a":
+            case "a" -> {
                 System.out.println(OPTIONS_SEPARATOR);
                 printAccountBalance();
                 System.out.println(OPTIONS_SEPARATOR);
-                break;
-            case "b":
+            }
+            case "b" -> {
                 System.out.println(OPTIONS_SEPARATOR);
                 openTransactionRunningMenu();
                 System.out.println(OPTIONS_SEPARATOR);
-                break;
-            case "c":
+            }
+            case "c" -> {
                 System.out.println(OPTIONS_SEPARATOR);
                 openTransactionHistoryMenu();
                 System.out.println(OPTIONS_SEPARATOR);
-                break;
-            case "d":
+            }
+            case "d" -> {
                 System.out.println(OPTIONS_SEPARATOR);
                 openAccountSettingsMenu();
                 System.out.println(OPTIONS_SEPARATOR);
-                break;
-            case "e":
-                exit();
-                break;
-            default:
-                System.out.println("Select an option to continue");
+            }
+            case "e" -> exit();
+            default -> System.out.println("Select an option to continue");
         }
     }
 
@@ -95,7 +92,7 @@ public class AccountMenu {
                 .append(bankAccount.getBalance().getCurrency())
                 .append("\n");
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 
     private void openTransactionRunningMenu() {

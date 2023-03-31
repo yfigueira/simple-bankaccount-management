@@ -31,7 +31,7 @@ public class Login {
         System.out.println(MAIN_SEPARATOR);
     }
 
-    static void printWelcomeMessage() {
+    private void printWelcomeMessage() {
         System.out.println("\n                                       Welcome To Simple Bank                                       \n");
     }
 
@@ -52,6 +52,6 @@ public class Login {
                 .append(customerName)
                 .append("!\n");
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 }
