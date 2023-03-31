@@ -34,11 +34,11 @@ public class AccountSettingsMenu {
     }
 
     private void printOptions() {
-        StringBuilder sb = new StringBuilder("\nOptions:")
-                .append("\n\ta: See Account Limits")
-                .append("\n\tb: Change Deposit Limit")
-                .append("\n\tc: Change Withdrawal Limit")
-                .append("\n\td: Return");
+        StringBuilder sb = new StringBuilder("\n                                            Options:")
+                .append("\n                                                a: See Account Limits")
+                .append("\n                                                b: Change Deposit Limit")
+                .append("\n                                                c: Change Withdrawal Limit")
+                .append("\n                                                d: Return");
 
         System.out.println(sb.toString());
     }
@@ -76,10 +76,10 @@ public class AccountSettingsMenu {
         AccountLimit depositLimit = bankAccount.getDepositLimit();
         AccountLimit withdrawalLimit = bankAccount.getWithdrawalLimit();
 
-        StringBuilder sb = new StringBuilder("\nCurrent Account Limits:")
-                .append("\n      Deposit Limit:\t")
+        StringBuilder sb = new StringBuilder("\n                             Current Account Limits:")
+                .append("\n                                    Deposit Limit:\t")
                 .append(getFormattedAccountLimit(depositLimit))
-                .append("\n   Withdrawal Limit:\t")
+                .append("\n                                 Withdrawal Limit:\t")
                 .append(getFormattedAccountLimit(withdrawalLimit))
                 .append("\n");
 
@@ -94,7 +94,7 @@ public class AccountSettingsMenu {
             accountLimit.setTransactionLimit(amount);
             printTransactionLimits();
         } catch (UnauthorizedBankOperationException ex) {
-            System.out.println("Operation Failed: " + ex.getMessage());
+            System.out.println("                                 Operation Failed: " + ex.getMessage() + "\n");
         }
     }
 

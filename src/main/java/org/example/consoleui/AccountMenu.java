@@ -43,12 +43,12 @@ public class AccountMenu {
     }
 
     private void printOptions() {
-        StringBuilder sb = new StringBuilder("\nOptions:")
-                .append("\n\ta: Check Account Balance")
-                .append("\n\tb: Perform Transaction")
-                .append("\n\tc: Transactions History")
-                .append("\n\td: Account Settings")
-                .append("\n\te: Exit");
+        StringBuilder sb = new StringBuilder("\n                                            Options:")
+                .append("\n                                                a: Check Account Balance")
+                .append("\n                                                b: Perform Transaction")
+                .append("\n                                                c: Transactions History")
+                .append("\n                                                d: Account Settings")
+                .append("\n                                                e: Exit");
 
         System.out.println(sb.toString());
     }
@@ -89,10 +89,11 @@ public class AccountMenu {
     }
 
     private void printAccountBalance() {
-        StringBuilder sb = new StringBuilder("                                        Balance:\t")
+        StringBuilder sb = new StringBuilder("\n                                          Balance:\t")
                 .append(bankAccount.getBalance().getAmount())
                 .append("\t")
-                .append(bankAccount.getBalance().getCurrency());
+                .append(bankAccount.getBalance().getCurrency())
+                .append("\n");
 
         System.out.println(sb.toString());
     }

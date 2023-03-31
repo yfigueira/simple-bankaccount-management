@@ -105,22 +105,23 @@ public class TransactionHistoryMenu {
         Money transactionAmount = lastTransaction.getAmount();
         Money finalBalance = lastTransaction.getResult();
 
-        StringBuilder sb = new StringBuilder("Type:             ")
+        StringBuilder sb = new StringBuilder("\n                                             Type:\t")
                 .append(transactionType.getType())
-                .append("\n    Initial Balance:\t")
+                .append("\n                                  Initial Balance:\t")
                 .append(lastTransaction.getInitialBalance().getAmount())
                 .append(" ")
                 .append(lastTransaction.getInitialBalance().getCurrency())
-                .append("\n             Amount:\t")
+                .append("\n                                           Amount:\t")
                 .append(transactionAmount.getAmount())
                 .append(" ")
                 .append(lastTransaction.getInitialBalance().getCurrency())
-                .append("\n      Final Balance:\t")
+                .append("\n                                    Final Balance:\t")
                 .append(finalBalance.getAmount())
                 .append(" ")
                 .append(lastTransaction.getInitialBalance().getCurrency())
-                .append("\n   Transaction Date:\t")
-                .append(getFormattedDate(lastTransaction.getDate()));
+                .append("\n                                 Transaction Date:\t")
+                .append(getFormattedDate(lastTransaction.getDate()))
+                .append("\n");
 
         return sb.toString();
     }

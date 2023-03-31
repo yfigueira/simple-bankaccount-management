@@ -32,10 +32,10 @@ public class TransactionRunningMenu {
     }
 
     private void printOptions() {
-        StringBuilder sb = new StringBuilder("\nOptions:")
-                .append("\n\ta: Deposit Funds")
-                .append("\n\tb: Withdraw Funds")
-                .append("\n\tc: Return");
+        StringBuilder sb = new StringBuilder("\n                                            Options:")
+                .append("\n                                                a: Deposit Funds")
+                .append("\n                                                b: Withdraw Funds")
+                .append("\n                                                c: Return");
 
         System.out.println(sb.toString());
     }
@@ -72,7 +72,7 @@ public class TransactionRunningMenu {
             bankAccount.deposit(amount);
             printAccountBalance();
         } catch (UnauthorizedBankOperationException ex) {
-            System.out.println("Transaction failed: " + ex.getMessage());
+            System.out.println("                               Transaction failed: " + ex.getMessage() + "\n");
         }
     }
 
@@ -84,7 +84,7 @@ public class TransactionRunningMenu {
             bankAccount.withdraw(amount);
             printAccountBalance();
         } catch (UnauthorizedBankOperationException ex) {
-            System.out.println("Transaction failed: " + ex.getMessage());
+            System.out.println("                               Transaction failed: " + ex.getMessage() + "\n");
         }
     }
 
@@ -109,10 +109,11 @@ public class TransactionRunningMenu {
     }
 
     private void printAccountBalance() {
-        StringBuilder sb = new StringBuilder("                                        Balance:\t")
+        StringBuilder sb = new StringBuilder("                                          Balance:\t")
                 .append(bankAccount.getBalance().getAmount())
                 .append("\t")
-                .append(bankAccount.getBalance().getCurrency());
+                .append(bankAccount.getBalance().getCurrency())
+                .append("\n");
 
         System.out.println(sb.toString());
     }
