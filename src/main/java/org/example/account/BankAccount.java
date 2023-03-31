@@ -86,4 +86,12 @@ public class BankAccount {
     public void setWithdrawalLimit(Money amount) {
         withdrawalLimit.setTransactionLimit(amount);
     }
+
+    public AccountLimit getDepositLimit() {
+        return depositLimit;
+    }
+
+    public AccountLimit getWithdrawalLimit() {
+        return withdrawalLimit;
+    }
 }

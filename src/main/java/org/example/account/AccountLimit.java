@@ -18,7 +18,7 @@ public class AccountLimit {
     }
 
     public void setTransactionLimit(Money transactionLimit) {
-        if (isLessThanZero(transactionLimit)) throw new UnauthorizedBankOperationException("Transaction Limit Must Be Greater Than Zero");
+        if (isLessThanZero(transactionLimit)) throw new UnauthorizedBankOperationException("Negative Value");
         this.transactionLimit = transactionLimit;
     }
 
